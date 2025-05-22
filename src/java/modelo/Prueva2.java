@@ -9,5 +9,8 @@ package modelo;
  * @author axel martinez
  */
 public class Prueva2 {
+
+    public Prueva2() {
+    }
     
 }
