@@ -1,39 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
-         http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
-
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee           http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>controlador.LoginServlet</servlet-class>
     </servlet>
-
     <servlet>
         <servlet-name>ControladorServlet</servlet-name>
         <servlet-class>controlador.ControladorServlet</servlet-class>
     </servlet>
-
+    <servlet>
+        <servlet-name>UsuariosServlet</servlet-name>
+        <servlet-class>controlador.UsuariosServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UsuariosController</servlet-name>
+        <servlet-class>controlador.UsuariosController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>clienteServlet</servlet-name>
+        <servlet-class>controlador.clienteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>ControladorServlet</servlet-name>
         <url-pattern>/ControladorServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>UsuariosServlet</servlet-name>
+        <url-pattern>/UsuariosServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsuariosController</servlet-name>
+        <url-pattern>/UsuariosController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>clienteServlet</servlet-name>
+        <url-pattern>/clienteServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-
     <!-- Esta parte redirige automáticamente a home.jsp al iniciar -->
     <welcome-file-list>
         <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
-
 </web-app>
-

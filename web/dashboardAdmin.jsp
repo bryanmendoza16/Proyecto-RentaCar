@@ -70,10 +70,13 @@
                     <h3>Gestión de Usuarios</h3>
                     <p>Administra las cuentas de acceso al sistema</p>
                     <div class="module-actions">
-                        <a href="usuarios/crear.jsp" class="action-btn create"><i class="fas fa-plus"></i> Crear</a>
-                        <a href="usuarios/listar.jsp" class="action-btn view"><i class="fas fa-eye"></i> Ver</a>
-                        <a href="usuarios/editar.jsp" class="action-btn edit"><i class="fas fa-edit"></i> Modificar</a>
-                        <a href="usuarios/eliminar.jsp" class="action-btn delete"><i class="fas fa-trash"></i> Eliminar</a>
+                        <a href="crearUsuario.jsp" class="action-btn create"><i class="fas fa-plus"></i> Crear</a>
+                       <a href="UsuariosController?accion=listar" class="action-btn view"><i class="fas fa-eye"></i> Ver</a>
+                        <a href="UsuariosController?accion=listarModificar" class="action-btn edit">
+                                <i class="fas fa-edit"></i> Modificar
+                             </a>
+                        <a href="UsuariosController?accion=eliminarVista
+"                       class="action-btn delete"><i class="fas fa-trash"></i> Eliminar</a>
                     </div>
                 </div>
                 
@@ -87,7 +90,7 @@
                     <div class="module-actions">
                         <a href="clientes/crear.jsp" class="action-btn create"><i class="fas fa-plus"></i> Crear</a>
                         <a href="clientes/listar.jsp" class="action-btn view"><i class="fas fa-eye"></i> Ver</a>
-                        <a href="clientes/editar.jsp" class="action-btn edit"><i class="fas fa-edit"></i> Modificar</a>
+                        <a href="modificarUsuario.jsp" class="action-btn edit"><i class="fas fa-edit"></i> Modificar</a>
                         <a href="clientes/eliminar.jsp" class="action-btn delete"><i class="fas fa-trash"></i> Eliminar</a>
                     </div>
                 </div>
