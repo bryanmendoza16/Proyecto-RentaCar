@@ -89,8 +89,9 @@
                     <h3>Clientes</h3>
                     <p>Administra los datos de los clientes</p>
                     <div class="card-actions">
-                        <a href="nuevoCliente.jsp" class="btn primary-btn">Nuevo Cliente</a>
-                        <a href="gestionClientes.jsp" class="btn secondary-btn">Ver Clientes</a>
+                       <a href="JSPEmpleado/formCliente.jsp" class="btn primary-btn">Nuevo Cliente</a>
+                        <a href="${pageContext.request.contextPath}/clienteServlet?action=list" class="btn secondary-btn">Ver Clientes</a>
+
                     </div>
                 </div>
             </div>
