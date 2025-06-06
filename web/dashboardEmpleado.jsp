@@ -59,8 +59,9 @@
                     <h3>Reservaciones</h3>
                     <p>Gestiona las reservaciones de vehículos</p>
                     <div class="card-actions">
-                        <a href="nuevaReservacion.jsp" class="btn primary-btn">Nueva Reservación</a>
-                        <a href="gestionReservaciones.jsp" class="btn secondary-btn">Ver Todas</a>
+                        <a href="RentaServlet?action=new" class="btn primary-btn">Nueva Reservación</a>
+                        <a href="RentaServlet" class="btn secondary-btn">Ver Todas</a>
+
                     </div>
                 </div>
             </div>
@@ -74,8 +75,9 @@
                     <h3>Facturación</h3>
                     <p>Genera y administra facturas para clientes</p>
                     <div class="card-actions">
-                        <a href="nuevaFactura.jsp" class="btn primary-btn">Nueva Factura</a>
-                        <a href="verFacturas.jsp" class="btn secondary-btn">Ver Facturas</a>
+                        <a href="FacturaServlet?action=new" class="btn primary-btn">Nueva Factura</a>
+                        <a href="FacturaServlet" class="btn secondary-btn">Ver Facturas</a>
+
                     </div>
                 </div>
             </div>

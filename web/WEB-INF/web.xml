@@ -20,6 +20,14 @@
         <servlet-name>clienteServlet</servlet-name>
         <servlet-class>controlador.clienteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RentaServlet</servlet-name>
+        <servlet-class>controlador.RentaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FacturaServlet</servlet-name>
+        <servlet-class>controlador.FacturaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>clienteServlet</servlet-name>
         <url-pattern>/clienteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RentaServlet</servlet-name>
+        <url-pattern>/RentaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FacturaServlet</servlet-name>
+        <url-pattern>/FacturaServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
