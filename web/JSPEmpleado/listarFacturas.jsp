@@ -1,4 +1,4 @@
-<%-- 
+<%--  
     Document   : listarFacturas
     Created on : 6 jun 2025, 15:50:26
     Author     : axel martinez
@@ -43,32 +43,34 @@
             background-color: #007bff;
             color: white;
         }
-        a.button {
+        a.button, button.action-btn {
             display: inline-block;
             padding: 8px 12px;
-            margin: 10px 0;
+            margin: 10px 10px 10px 0;
             background-color: #007bff;
             color: white;
             text-decoration: none;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
         }
-        a.button:hover {
+        a.button:hover, button.action-btn:hover {
             background-color: #0056b3;
         }
-        .actions a {
-            margin-right: 10px;
-            color: #007bff;
-            text-decoration: none;
-        }
-        .actions a:hover {
-            text-decoration: underline;
+        .actions form {
+            display: inline;
+            margin: 0;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <h2>Listado de Facturas</h2>
-    <a href="FacturaServlet?action=new" class="button">Nueva Factura</a>
+
+    <!-- Botón para volver al DashboardEmpleado -->
+    <a href="dashboardEmpleado.jsp" class="button">Volver al Dashboard</a>
+
     <table>
         <thead>
         <tr>
@@ -93,8 +95,26 @@
             <td><%= f.getFechaPago() %></td>
             <td>$<%= String.format("%.2f", f.getMonto()) %></td>
             <td class="actions">
-                <a href="FacturaServlet?action=edit&id=<%= f.getFacturaID() %>">Editar</a>
-                <a href="FacturaServlet?action=delete&id=<%= f.getFacturaID() %>" onclick="return confirm('¿Está seguro de eliminar esta factura?');">Eliminar</a>
+                <!-- Botón Editar (envía con GET) -->
+                <form action="FacturaServlet" method="get" style="display:inline;">
+                    <input type="hidden" name="action" value="edit" />
+                    <input type="hidden" name="id" value="<%= f.getFacturaID() %>" />
+                    <button type="submit" class="action-btn">Editar</button>
+                </form>
+
+                <!-- Botón Eliminar (envía con POST o GET, pero aquí GET para simplificar) -->
+                <form action="FacturaServlet" method="get" style="display:inline;" onsubmit="return confirm('¿Está seguro de eliminar esta factura?');">
+                    <input type="hidden" name="action" value="delete" />
+                    <input type="hidden" name="id" value="<%= f.getFacturaID() %>" />
+                    <button type="submit" class="action-btn" style="background-color: #dc3545;">Eliminar</button>
+                </form>
+
+                <!-- Botón Ver PDF -->
+                <form action="FacturaServlet" method="get" target="_blank" style="display:inline;">
+                    <input type="hidden" name="action" value="generarPDF" />
+                    <input type="hidden" name="id" value="<%= f.getFacturaID() %>" />
+                    <button type="submit" class="action-btn" style="background-color: #28a745;">Ver PDF</button>
+                </form>
             </td>
         </tr>
         <%
@@ -112,4 +132,3 @@
 </div>
 </body>
 </html>
-

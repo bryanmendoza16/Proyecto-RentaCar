@@ -37,7 +37,8 @@ public class RentaDAO {
     }
 
     public void insertar(Renta r) {
-        String sql = "INSERT INTO renta (VehiculoID, EmpleadoID, ClienteID, FechaInicio, FechaFin, Total, FechaRegistro) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO renta (VehiculoID, EmpleadoID, ClienteID, FechaInicio, FechaFin, Total, FechaRegistro) VALUES (?, ?, ?, ?, ?, ?, NOW())";
+
 
         try {
             con = ConexionDB.getConnection();
@@ -48,7 +49,7 @@ public class RentaDAO {
             ps.setDate(4, r.getFechaInicio());
             ps.setDate(5, r.getFechaFin());
             ps.setDouble(6, r.getTotal());
-            ps.setDate(7, r.getFechaRegistro());
+           
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

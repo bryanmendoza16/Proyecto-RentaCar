@@ -1,37 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controlador;
 
+
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import modelo.Factura;
 import modelo.FacturaDAO;
 import modelo.Renta;
 
+// resto del código...
+
+
 public class FacturaServlet extends HttpServlet {
-     private FacturaDAO facturaDAO;
-     
-      @Override
+    private FacturaDAO facturaDAO;
+
+    @Override
     public void init() throws ServletException {
         facturaDAO = new FacturaDAO();
-    }
-     
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-           
-        }
     }
 
     @Override
@@ -63,6 +59,16 @@ public class FacturaServlet extends HttpServlet {
                 response.sendRedirect("FacturaServlet");
                 break;
 
+            case "generarPDF":
+                int idFactura = Integer.parseInt(request.getParameter("id"));
+                Factura facturaPDF = facturaDAO.obtenerPorId(idFactura);
+                if (facturaPDF != null) {
+                    generarFacturaPDF(facturaPDF, response);
+                } else {
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Factura no encontrada");
+                }
+                break;
+
             default:
                 List<Factura> listaFacturas = facturaDAO.obtenerTodas();
                 request.setAttribute("facturas", listaFacturas);
@@ -71,11 +77,10 @@ public class FacturaServlet extends HttpServlet {
         }
     }
 
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         int facturaID = request.getParameter("facturaID") != null && !request.getParameter("facturaID").isEmpty()
+        int facturaID = request.getParameter("facturaID") != null && !request.getParameter("facturaID").isEmpty()
                 ? Integer.parseInt(request.getParameter("facturaID")) : 0;
 
         int rentaID = Integer.parseInt(request.getParameter("rentaID"));
@@ -97,20 +102,44 @@ public class FacturaServlet extends HttpServlet {
         factura.setMonto(monto);
 
         if (facturaID == 0) {
-            // Insertar
             facturaDAO.insertar(factura);
         } else {
-            // Actualizar
             factura.setFacturaID(facturaID);
             facturaDAO.actualizar(factura);
         }
         response.sendRedirect("FacturaServlet");
+    }
+
+    private void generarFacturaPDF(Factura factura, HttpServletResponse response) throws IOException {
+        // Configurar respuesta para PDF
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=factura_" + factura.getFacturaID() + ".pdf");
+
+        Document document = new Document();
+        try {
+            PdfWriter.getInstance(document, response.getOutputStream());
+            document.open();
+
+            Font titulo = new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD);
+            Font texto = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
+
+            document.add(new Paragraph("Factura #" + factura.getFacturaID(), titulo));
+            document.add(new Paragraph(" "));
+            document.add(new Paragraph("Renta ID: " + factura.getRentaID(), texto));
+            document.add(new Paragraph("Fecha de pago: " + factura.getFechaPago(), texto));
+            document.add(new Paragraph("Monto: $" + factura.getMonto(), texto));
+
+            // Aquí podrías agregar más detalles de la factura si quieres,
+            // por ejemplo, datos del cliente o del vehículo, etc.
+
+            document.close();
+        } catch (DocumentException e) {
+            throw new IOException(e.getMessage());
         }
-    
+    }
 
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Servlet para gestión de Facturas y generación de PDF";
+    }
 }
